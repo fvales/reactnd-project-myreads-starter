@@ -42,12 +42,17 @@ class BookPage extends React.Component {
   }
 
   componentDidMount() {
-    // Add books to their respective shelf
-    console.log(this.props.books);
-    // this.addBooksToShelf(this.props.books);
+    // Add books to their respective shelf;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.books !== prevProps.books) {
+      this.addBooksToShelf(this.props.books);
+    }
   }
 
   render() {
+    console.log(this.props.books);
     return (
       <div className="list-books">
         <Header />
@@ -55,17 +60,17 @@ class BookPage extends React.Component {
           <BookShelf
             shelfName="Currently Reading"
             books={this.state.currentlyReading}
-            updateShelf={this.updateShelf}
+            updateShelf={this.props.updateShelf}
           />
           <BookShelf
             shelfName="Want to Read"
             books={this.state.wantToRead}
-            updateShelf={this.updateShelf}
+            updateShelf={this.props.updateShelf}
           />
           <BookShelf
             shelfName="Read"
             books={this.state.read}
-            updateShelf={this.updateShelf}
+            updateShelf={this.props.updateShelf}
           />
           <AddBookButton />
         </div>

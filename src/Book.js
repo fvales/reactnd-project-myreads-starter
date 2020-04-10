@@ -17,7 +17,7 @@ function Book(props) {
         <ControlMenu updateShelf={props.updateShelf} book={props.book} />
       </div>
       <div className="book-title">{props.book.title}</div>
-      <div className="book-authors">Hey</div>
+      <div className="book-authors">{props.book.authors}</div>
     </div>
   );
 }
