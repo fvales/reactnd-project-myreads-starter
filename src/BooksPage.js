@@ -31,28 +31,26 @@ class BookPage extends React.Component {
       }
     });
     this.setState({
-      currentlyReading: [...this.state.currentlyReading, ...currentlyReading]
+      currentlyReading: [...currentlyReading]
     });
     this.setState({
-      wantToRead: [...this.state.wantToRead, ...wantToRead]
+      wantToRead: [...wantToRead]
     });
     this.setState({
-      read: [...this.state.read, ...read]
+      read: [...read]
     });
   }
 
-  componentDidMount() {
-    // Add books to their respective shelf;
-  }
+  componentDidMount() {}
 
   componentDidUpdate(prevProps) {
     if (this.props.books !== prevProps.books) {
+      // Add books to their respective shelf;
       this.addBooksToShelf(this.props.books);
     }
   }
 
   render() {
-    console.log(this.props.books);
     return (
       <div className="list-books">
         <Header />

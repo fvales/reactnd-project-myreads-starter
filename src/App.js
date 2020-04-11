@@ -7,10 +7,15 @@ import SearchPage from "./SearchPage";
 import { Route } from "react-router-dom";
 
 class BooksApp extends React.Component {
-  // Books - Books currently in shelves
-  state = {
-    books: []
-  };
+  constructor() {
+    super();
+    // Books - Books currently in shelves
+    this.state = {
+      books: []
+    };
+
+    this.updateShelf = this.updateShelf.bind(this);
+  }
 
   componentDidMount() {
     // Get all the books currently in shelves
@@ -23,6 +28,7 @@ class BooksApp extends React.Component {
 
   updateShelf(book, shelf) {
     API.update(book, shelf).then(() => {
+      book.shelf = shelf;
       this.setState(currentState => ({
         books: currentState.books.filter(b => b.id !== book.id).concat([book])
       }));
