@@ -10,6 +10,7 @@ class BookPage extends React.Component {
     read: []
   };
 
+  // Add books to their respective shelf;
   addBooksToShelf(books) {
     let currentlyReading = [];
     let wantToRead = [];
@@ -41,11 +42,12 @@ class BookPage extends React.Component {
     });
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.addBooksToShelf(this.props.books);
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.books !== prevProps.books) {
-      // Add books to their respective shelf;
       this.addBooksToShelf(this.props.books);
     }
   }

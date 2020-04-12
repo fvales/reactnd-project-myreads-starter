@@ -1,12 +1,43 @@
 import React from "react";
 import BookList from "./BookList";
 import { Link } from "react-router-dom";
+import * as API from "./BooksAPI";
 
 class SearchPage extends React.Component {
-  state = {};
+  constructor() {
+    super();
+    this.state = {
+      searchResult: []
+    };
+
+    this.updateSearchList = this.updateSearchList.bind(this);
+  }
+
+  updateSearchList(event) {
+    let query = event.target.value;
+
+    this.setState({
+      searchResult: []
+    });
+
+    if (query.length > 0) {
+      API.search(query.trim()).then(response => {
+        if (!response.error) {
+          console.log(response);
+          response.map(book => {
+            this.props.books
+              .filter(_book => _book.id === book.id)
+              .map(b => (book.shelf = b.shelf));
+          });
+          this.setState({
+            searchResult: response
+          });
+        }
+      });
+    }
+  }
 
   render() {
-    console.log(this.props.books);
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -14,12 +45,16 @@ class SearchPage extends React.Component {
             <button className="close-search">Close</button>
           </Link>
           <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search by title or author" />
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              onChange={this.updateSearchList}
+            />
           </div>
         </div>
         <div className="search-books-results">
           <BookList
-            books={this.props.books}
+            books={this.state.searchResult}
             updateShelf={this.props.updateShelf}
           />
         </div>

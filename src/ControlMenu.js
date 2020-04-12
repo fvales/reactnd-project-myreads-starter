@@ -4,7 +4,7 @@ function ControlMenu(props) {
   return (
     <div className="book-shelf-changer">
       <select
-        value={props.book.shelf}
+        value={props.book.shelf ? props.book.shelf : "none"}
         onChange={e => props.updateShelf(props.book, e.target.value)}
       >
         <option value="move" disabled>

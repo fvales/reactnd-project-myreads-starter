@@ -2,7 +2,6 @@ import React from "react";
 import Book from "./Book";
 
 function BookList(props) {
-  // console.log(props.books);
   return (
     <ol className="books-grid">
       {props.books.map(_book => {
