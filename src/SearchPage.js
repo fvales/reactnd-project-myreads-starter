@@ -23,8 +23,7 @@ class SearchPage extends React.Component {
     if (query.length > 0) {
       API.search(query.trim()).then(response => {
         if (!response.error) {
-          console.log(response);
-          response.map(book => {
+          response.forEach(book => {
             this.props.books
               .filter(_book => _book.id === book.id)
               .map(b => (book.shelf = b.shelf));
